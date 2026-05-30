@@ -1,14 +1,10 @@
-
-<!-- START OF FILE trading_app.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trading App User</title>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -110,7 +106,7 @@
         .market-closed-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border-radius: 10px; z-index: 50; display: none; }
 
         .amount-input-box { background: var(--bg-card); padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
-        .amount-input-box input { background: transparent; border: none; color: white; font-size: 18px; width: 100px; text-align: right; outline: none; }
+        .amount-input-box input { background: transparent; border: none; color: white; font-size: 18px; width: 120px; text-align: right; outline: none; }
 
         .card { background: var(--bg-card); padding: 15px; border-radius: 12px; margin-bottom: 15px; }
         .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
@@ -144,7 +140,6 @@
         .result-box { text-align: center; transform: scale(0.8); transition: 0.3s; }
         #result-overlay.active .result-box { transform: scale(1); }
         .result-amount { font-size: 40px; font-weight: bold; margin: 20px 0; }
-        .win-bal-label { font-size: 12px; color: var(--green); margin-top: 5px; }
 
         /* Quick Amount Buttons */
         .quick-amounts { display: flex; gap: 8px; margin-top: 10px; }
@@ -169,7 +164,7 @@
         <header>
             <div class="balance-box">
                 <span class="balance-label">Total Balance</span>
-                <span class="balance-amount">NGN<span id="user-balance">0.00</span></span>
+                <span class="balance-amount">NGN <span id="user-balance">0.00</span></span>
             </div>
             <div class="user-icon" onclick="switchTab('profile')"><i class="fa-solid fa-user-circle fa-2x"></i></div>
         </header>
@@ -224,17 +219,10 @@
                 </div>
 
                 <div class="card">
-                    <h4 style="margin-bottom:10px; color: var(--green);"><i class="fa-solid fa-1"></i> Step 1: Enter Amount & Pay</h4>
+                    <h4 style="margin-bottom:10px; color: var(--green);"><i class="fa-solid fa-1"></i> Step 1: DEPOSIT PAYMENT</h4>
                     
                     <div class="input-group">
-                        <input type="number" id="deposit-amount" placeholder="Enter Amount (Min NGN1000)">
-                    </div>
-                    
-                    <div class="quick-amounts" style="margin-bottom: 15px;">
-                        <div class="amt-btn" onclick="document.getElementById('deposit-amount').value = 1000">NGN1000</div>
-                        <div class="amt-btn" onclick="document.getElementById('deposit-amount').value = 1500">NGN1500</div>
-                        <div class="amt-btn" onclick="document.getElementById('deposit-amount').value = 5000">NGN5000</div>
-                        <div class="amt-btn" onclick="document.getElementById('deposit-amount').value = 10000">NGN10000</div>
+                        <input type="number" id="deposit-amount" placeholder="Enter Amount (Min NGN100)">
                     </div>
                     
                     <button class="btn btn-primary" onclick="payViaLink()"><i class="fa-solid fa-link"></i> Pay Now</button>
@@ -243,9 +231,9 @@
 
                 <div class="card">
                     <h4 style="margin-bottom:10px; color: var(--green);"><i class="fa-solid fa-2"></i> Step 2: Verify Payment</h4>
-                    <p style="font-size:11px; color:var(--text-sub); margin-bottom:15px;">After successfully paying, enter the UTR number and upload the screenshot.</p>
+                    <p style="font-size:11px; color:var(--text-sub); margin-bottom:15px;">After successfully paying, enter the account number and upload the screenshot.</p>
 
-                    <input type="text" id="deposit-utr" placeholder="12-Digit UTR / Ref Number" style="width:100%; padding:12px; border-radius:8px; background:var(--input-bg); border:1px solid #444; color:white; margin-bottom:15px; outline:none;">
+                    <input type="text" id="deposit-ngn" placeholder="ACCOUNT Number" style="width:100%; padding:12px; border-radius:8px; background:var(--input-bg); border:1px solid #444; color:white; margin-bottom:15px; outline:none;">
 
                     <label for="deposit-file" class="btn" style="background:#444; display:block; cursor:pointer; margin-bottom:15px; text-align:center;">
                         <i class="fa-solid fa-upload"></i> Upload Screenshot
@@ -263,23 +251,18 @@
                     <i class="fa-solid fa-building-columns" style="font-size: 40px; color: var(--warning); margin-bottom:10px;"></i>
                     <h3>Withdraw Funds</h3>
                     <p style="font-size:12px; color:var(--text-sub); margin-bottom: 5px;">Transfer your trading winnings securely to your Bank Account.</p>
-                    
-                    <div style="margin: 15px 0; padding: 15px; background: rgba(0, 230, 118, 0.1); border-radius: 8px; border: 1px solid var(--green);">
-                        <span style="color:var(--text-sub); font-size: 12px; display:block; margin-bottom: 5px;">Withdrawable Winnings Balance</span>
-                        <h2 style="margin: 0; color:var(--green)">NGN<span id="winning-balance">0.00</span></h2>
-                    </div>
                 </div>
 
                 <div class="card">
                     <h4 style="margin-bottom: 15px;">Withdrawal Details</h4>
                     <div class="input-group" style="margin-top: 10px;">
                         <label style="font-size: 11px; color: var(--text-sub); margin-bottom: 5px; display: block;">Enter Amount to Withdraw</label>
-                        <input type="number" id="withdraw-amount" placeholder="Amount (Min NGN5000)">
+                        <input type="number" id="withdraw-amount" placeholder="Amount (Min NGN 5000)">
                     </div>
                     
                     <div class="input-group" style="margin-top: 15px;">
                         <label style="font-size: 11px; color: var(--text-sub); margin-bottom: 5px; display: block;">Enter Your Bank Details</label>
-                        <input type="text" id="withdraw-upi" placeholder="Your Bank Details (e.g.,Acc no/Bank/name)">
+                        <input type="text" id="withdraw-upi" placeholder="Your Bank Details (e.g., Acc no/Bank/name)">
                     </div>
                     
                     <button class="btn btn-primary" style="margin-top:20px;" onclick="submitWithdraw()"><i class="fa-solid fa-paper-plane"></i> Request Withdrawal</button>
@@ -298,32 +281,28 @@
             <div id="tab-profile" class="tab-content">
                 <div class="profile-header">
                     <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
-                    <h2 id="profile-name">User Name</h2>
-                    <p id="profile-email" style="color: var(--text-sub);">user@email.com</p>
+                    <h2 id="profile-name">User Account</h2>
+                    <p id="profile-email" style="color: var(--text-sub);"></p>
                 </div>
                 <div class="card">
-                    <div class="stat-row"><span>Total Balance</span><span>NGN<span id="profile-total-bal">0</span></span></div>
-                    <div class="stat-row"><span>Withdrawable</span><span class="green-text">NGN<span id="profile-winning">0</span></span></div>
-                    <div class="stat-row"><span>Total Profit</span><span class="green-text">+NGN<span id="profile-profit">0</span></span></div>
-                    <div class="stat-row"><span>Total Loss</span><span class="red-text">-NGN<span id="profile-loss">0</span></span></div>
-                </div>
-                
+                    <div class="stat-row"><span>Total Balance</span><span>NGN <span id="profile-total-bal">0.00</span></span></div>
+                    <div class="stat-row"><span>Winning Balance</span><span>NGN <span id="winning-balance">0.00</span></span></div>
+                    <div class="stat-row"><span>Total Profit</span><span>NGN <span id="profile-profit">0.00</span></span></div>
+                    <div class="stat-row"><span>Total Loss</span><span>NGN <span id="profile-loss">0.00</span></span></div>
+                    <div class="hidden"><span id="profile-winning">0.00</span></div>
                 </div>
                 
                 <div class="card">
-    <h3>Help & Support</h3>
-    <div class="support-grid">
-        
-        <a href="https://wa.me/2348108741739" target="_blank" class="support-btn support-wa">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-
-        <a href="https://t.me/OPAYPRO01" target="_blank" class="support-btn support-tg">
-            <i class="fa-brands fa-telegram"></i> Telegram
-        </a>
-
-    </div>
-</div>
+                    <h3>Help & Support</h3>
+                    <div class="support-grid">
+                        <a href="https://wa.me/2349156570133" id="btn-wa" target="_blank" class="support-btn support-wa">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://t.me/ARABTECH001" id="btn-tg" target="_blank" class="support-btn support-tg">
+                            <i class="fa-brands fa-telegram"></i> Telegram
+                        </a>
+                    </div>
+                </div>
 
                 <button class="btn btn-red" onclick="logout()">Logout</button>
             </div>
@@ -351,7 +330,7 @@
         <div class="result-box">
             <i class="fa-solid fa-trophy" id="result-icon" style="font-size: 60px; margin-bottom: 20px;"></i>
             <h2 id="result-title">YOU WON!</h2>
-            <div class="result-amount" id="result-amount">+NGN180</div>
+            <div class="result-amount" id="result-amount">NGN 0.00</div>
             <button class="btn btn-primary" onclick="closeResult()">Continue Trading</button>
         </div>
     </div>
@@ -360,17 +339,16 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // ⚠️ REPLACE THIS CONFIG WITH YOUR FIREBASE CONFIG ⚠️
         const firebaseConfig = {
-  apiKey: "AIzaSyCN2jvLDlubJRP7OGnazblFP54xrHD3XnM",
-  authDomain: "aviator-game-f0d02.firebaseapp.com",
-  projectId: "aviator-game-f0d02",
-  storageBucket: "aviator-game-f0d02.firebasestorage.app",
-  messagingSenderId: "968680126342",
-  appId: "1:968680126342:web:c1686773e8568dbb8e1e07",
-  measurementId: "G-JLT3BYH6JB"
-};
-        // -------------------------
+            apiKey: "AIzaSyBRhYqJ3195U0VoBDFY-hGN9FVVuD2OJ9s",
+            authDomain: "opaypro-8629a.firebaseapp.com",
+            databaseURL: "https://opaypro-8629a-default-rtdb.firebaseio.com",
+            projectId: "opaypro-8629a",
+            storageBucket: "opaypro-8629a.firebasestorage.app",
+            messagingSenderId: "521490802972",
+            appId: "1:521490802972:web:9491c2d489bd7e52eaf2d9",
+            measurementId: "G-EV8DV7DDM4"
+        };
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
@@ -430,7 +408,7 @@
         function handleAuth() {
             const email = document.getElementById('auth-email').value;
             const pass = document.getElementById('auth-pass').value;
-            const name = document.getElementById('signup-name').value;
+            const name = document.getElementById('signup-name').value || "Trader";
             
             if(!email || !pass || !email.includes('@')) return showToast("Enter valid email & password");
             
@@ -439,16 +417,23 @@
 
             db.ref('users/' + uid).once('value', snapshot => {
                 if (isLoginMode) {
-                    if (snapshot.exists() && snapshot.val().password === pass) loginSuccess(uid);
-                    else showToast("Invalid Credentials");
+                    if (snapshot.exists() && snapshot.val().password === pass) {
+                        loginSuccess(uid);
+                    } else {
+                        showToast("Invalid Credentials");
+                    }
                 } else {
-                    if (snapshot.exists()) showToast("User already exists");
-                    else {
+                    if (snapshot.exists()) {
+                        showToast("User already exists");
+                    } else {
                         db.ref('users/' + uid).set({ 
                             name: name, email: email, password: pass, balance: 100, winningBalance: 0, 
                             profit: 0, loss: 0, blocked: false, patternIndex: 0 
+                        }).then(() => {
+                            loginSuccess(uid);
+                        }).catch(err => {
+                            showToast("Database error during account configuration");
                         });
-                        loginSuccess(uid);
                     }
                 }
             });
@@ -480,7 +465,6 @@
             db.ref('adminSettings').on('value', snap => {
                 const settings = snap.val();
                 if(settings) {
-                    // Update all payment links
                     adminPaymentLinks.default = settings.paymentLink || "";
                     adminPaymentLinks[1000] = settings.paymentLink1000 || "";
                     adminPaymentLinks[1200] = settings.paymentLink1200 || "";
@@ -538,11 +522,14 @@
         }
 
         function renderLoop() {
+            if (!assetsState[currentAsset.name]) return requestAnimationFrame(renderLoop);
             assetsList.forEach(asset => {
                 let state = assetsState[asset.name];
-                const diff = state.targetPrice - state.currentPrice;
-                if(Math.abs(diff) > 0.000001) state.currentPrice += diff * 0.05; else state.currentPrice = state.targetPrice;
-                if(state.history.length > 0) state.history[state.history.length - 1] = state.currentPrice;
+                if(state) {
+                    const diff = state.targetPrice - state.currentPrice;
+                    if(Math.abs(diff) > 0.000001) state.currentPrice += diff * 0.05; else state.currentPrice = state.targetPrice;
+                    if(state.history.length > 0) state.history[state.history.length - 1] = state.currentPrice;
+                }
             });
 
             const activeState = assetsState[currentAsset.name];
@@ -633,8 +620,8 @@
 
         function updateSupportLinks(wa, tg) {
             const btnWa = document.getElementById('btn-wa'); const btnTg = document.getElementById('btn-tg');
-            if(wa && wa.length > 5) { btnWa.href = wa; btnWa.classList.remove('disabled-link'); } else { btnWa.classList.add('disabled-link'); }
-            if(tg && tg.length > 5) { btnTg.href = tg; btnTg.classList.remove('disabled-link'); } else { btnTg.classList.add('disabled-link'); }
+            if(wa && wa.length > 5) { btnWa.href = wa; btnWa.classList.remove('disabled-link'); } else { btnWa.removeAttribute('href'); btnWa.classList.add('disabled-link'); }
+            if(tg && tg.length > 5) { btnTg.href = tg; btnTg.classList.remove('disabled-link'); } else { btnTg.removeAttribute('href'); btnTg.classList.add('disabled-link'); }
         }
 
         function updateMarketUI() {
@@ -663,22 +650,18 @@
         }
 
         function setTime(t) { 
-    selectedTime = t;
-
-    // remove active from all
-    document.querySelectorAll('.control-pill').forEach(el => {
-        el.classList.remove('active');
-    });
-
-    // add active to clicked one
-    document.getElementById('time-' + t).classList.add('active');
-}
+            selectedTime = t;
+            document.querySelectorAll('.control-pill').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById('time-' + t).classList.add('active');
+        }
 
         function placeTrade(direction) {
             if(!isMarketOpen) return showToast("Market is CLOSED");
             if(isTrading) return showToast("Trade already active");
             const amount = parseFloat(document.getElementById('trade-amount').value);
-            if(isNaN(amount) || amount < 10) return showToast("Min Trade NGN1000");
+            if(isNaN(amount) || amount < 1000) return showToast("Min Trade NGN 1000");
             if(amount > currentUser.balance) return showToast("Insufficient Balance");
             const newBal = parseFloat(currentUser.balance) - amount;
             db.ref('users/' + currentUserId).update({ balance: newBal });
@@ -719,25 +702,23 @@
                 db.ref('users/' + currentUserId).update({ balance: parseFloat(currentUser.balance) + resultAmt, winningBalance: parseFloat(currentUser.winningBalance || 0) + (resultAmt - tradeAmount), profit: parseFloat(currentUser.profit || 0) + (resultAmt - tradeAmount) });
                 document.getElementById('result-icon').className = "fa-solid fa-trophy"; document.getElementById('result-icon').style.color = "#FFD700";
                 document.getElementById('result-title').innerText = "YOU WON!"; document.getElementById('result-title').className = "green-text";
-                document.getElementById('result-amount').innerText = "+" + resultAmt.toFixed(2);
+                document.getElementById('result-amount').innerText = "NGN " + resultAmt.toFixed(2);
                 document.getElementById('result-overlay').classList.add('active');
             } else {
                 db.ref('users/' + currentUserId).update({ loss: parseFloat(currentUser.loss || 0) + tradeAmount });
                 document.getElementById('result-icon').className = "fa-solid fa-circle-xmark"; document.getElementById('result-icon').style.color = "#ff3d00";
                 document.getElementById('result-title').innerText = "YOU LOST"; document.getElementById('result-title').className = "red-text";
-                document.getElementById('result-amount').innerText = "-" + tradeAmount.toFixed(2);
+                document.getElementById('result-amount').innerText = "-NGN " + tradeAmount.toFixed(2);
                 document.getElementById('result-overlay').classList.add('active');
             }
         }
 
         function closeResult() { document.getElementById('result-overlay').classList.remove('active'); }
 
-        // --------- DIRECT PAYMENT LINK REDIRECT ---------
         function payViaLink() {
             const amt = parseInt(document.getElementById('deposit-amount').value);
-            if(!amt || amt < 50) return showToast("Enter minimum NGN50 amount");
+            if(!amt || amt < 100) return showToast("Enter minimum NGN 100 amount");
             
-            // Link selection logic
             let finalLink = adminPaymentLinks[amt] && adminPaymentLinks[amt].trim() !== "" 
                             ? adminPaymentLinks[amt] 
                             : adminPaymentLinks.default;
@@ -749,7 +730,6 @@
             window.open(finalLink, '_blank');
         }
 
-        // --------- SCREENSHOT COMPRESSION & UPLOAD ---------
         function handleScreenshotUpload(event) {
             const file = event.target.files[0];
             if(!file) return;
@@ -780,17 +760,17 @@
 
         function submitDeposit() {
             const amt = parseFloat(document.getElementById('deposit-amount').value);
-            const utr = document.getElementById('deposit-utr').value.trim();
+            const accountNo = document.getElementById('deposit-ngn').value.trim();
             
-            if(!amt || amt < 50) return showToast("Deposit amount minimum NGN50");
-            if(!utr || utr.length < 6) return showToast("Please enter a valid UTR/Reference No.");
+            if(!amt || amt < 100) return showToast("Deposit amount minimum NGN 100");
+            if(!accountNo || accountNo.length < 6) return showToast("Please enter a valid Account Number");
             if(!currentScreenshotBase64) return showToast("Please upload a payment screenshot!");
 
             const reqId = Date.now();
             const data = { 
                 type: 'DEPOSIT', 
                 amount: amt, 
-                utr: utr, 
+                ngn: accountNo, 
                 screenshot: currentScreenshotBase64,
                 status: 'PENDING', 
                 time: new Date().toISOString(), 
@@ -801,7 +781,7 @@
             db.ref('deposits/' + reqId).set(data);
             
             document.getElementById('deposit-amount').value = ""; 
-            document.getElementById('deposit-utr').value = "";
+            document.getElementById('deposit-ngn').value = "";
             document.getElementById('screenshot-preview').src = "";
             document.getElementById('screenshot-preview').style.display = 'none';
             currentScreenshotBase64 = "";
@@ -813,7 +793,7 @@
         function submitWithdraw() {
             const amt = parseFloat(document.getElementById('withdraw-amount').value);
             const upi = document.getElementById('withdraw-upi').value;
-            if(!amt || amt < 5000) return showToast("Min Withdrawal NGN5000");
+            if(!amt || amt < 5000) return showToast("Min Withdrawal NGN 5000");
             if(!upi) return showToast("Enter Acc details");
             if(amt > currentUser.winningBalance) return showToast("Insufficient Winning Balance");
             
@@ -864,10 +844,10 @@
                 let html = ""; const dateStr = new Date(item.time).toLocaleString();
                 if(type === 'trades') {
                     const statusColor = item.status === 'WIN' ? 'var(--green)' : 'var(--red)';
-                    html = `<div class="history-item"><div><div style="font-weight:bold">${item.asset} (${item.direction})</div><div style="font-size:11px; color:#aaa">Inv: NGN${item.amount}</div><div style="font-size:10px; color:#666">${dateStr}</div></div><div style="text-align:right"><div style="color:${statusColor}; font-weight:bold">${item.status}</div><div style="font-size:10px; color:#666">Close: ${item.close}</div></div></div>`;
+                    html = `<div class="history-item"><div><div style="font-weight:bold">${item.asset} (${item.direction})</div><div style="font-size:11px; color:#aaa">Inv: NGN ${item.amount}</div><div style="font-size:10px; color:#666">${dateStr}</div></div><div style="text-align:right"><div style="color:${statusColor}; font-weight:bold">${item.status}</div><div style="font-size:10px; color:#666">Close: ${item.close}</div></div></div>`;
                 } else {
                     let badgeClass = (item.status === 'APPROVED' || item.status === 'SUCCESS') ? "status-success" : (item.status === 'REJECTED' ? "status-rejected" : "status-pending");
-                    html = `<div class="history-item"><div><div style="font-weight:bold">${type === 'deposits' ? 'Deposit' : 'Withdraw'} NGN${item.amount}</div><div style="font-size:10px; color:#666">${item.utr || item.upi || ''}</div></div><div style="text-align:right"><span class="status-badge ${badgeClass}">${item.status}</span><div style="font-size:10px; color:#666; margin-top:2px;">${dateStr.split(',')[0]}</div></div></div>`;
+                    html = `<div class="history-item"><div><div style="font-weight:bold">${type === 'deposits' ? 'Deposit' : 'Withdraw'} NGN ${item.amount}</div><div style="font-size:10px; color:#666">${item.ngn || item.upi || ''}</div></div><div style="text-align:right"><span class="status-badge ${badgeClass}">${item.status}</span><div style="font-size:10px; color:#666; margin-top:2px;">${dateStr.split(',')[0]}</div></div></div>`;
                 }
                 container.innerHTML += html;
             });
